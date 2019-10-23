@@ -1,0 +1,11 @@
+<aura:component>
+    <aura:attribute name="name" type="String" />
+    <aura:attribute name="infermedicaId" type="String" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <!-- <c:eDiagnoseContainer name="Matt" infermedicaId="123"/> -->
+
+    <p>Dynamically created button</p>
+    {!v.body}
+</aura:component>	

@@ -1,0 +1,16 @@
+<template>
+
+    <lightning-card title="Symptoms">
+        <lightning-button-stateful
+            label-when-off={symptomName}
+            label-when-on={infermedicaId}
+            label-when-hover="Deselect"
+            icon-name-when-off="utility:add"
+            icon-name-when-on="utility:check"
+            icon-name-when-hover="utility:close"
+            selected={isSelected}
+            onclick={handleClick}
+            >
+        </lightning-button-stateful>
+    </lightning-card>
+</template>
