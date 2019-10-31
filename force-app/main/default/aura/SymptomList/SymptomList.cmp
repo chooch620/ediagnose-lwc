@@ -1,3 +1,12 @@
-<aura:component implements="flexipage:availableForAllPageTypes">
-    <c:SymptomListLineItem />
-</aura:component>	
+<aura:component implements="flexipage:availableForAllPageTypes" controller="SymptomListController">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="possibleSymptoms" type="Symptom__c[]" />
+
+    <lightning:card title="Symptoms">
+        <div class="slds-p-left_medium">
+            <aura:iteration items="{!v.possibleSymptoms}" var="symptom">
+                <c:SymptomListLineItem symptom="{!symptom}" />
+            </aura:iteration>
+        </div>
+    </lightning:card>
+</aura:component>

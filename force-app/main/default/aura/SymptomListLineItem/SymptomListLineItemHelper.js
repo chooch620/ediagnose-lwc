@@ -1,13 +1,36 @@
 ({
-    getSymptoms : function() {
-        List<Symptom__c> symptoms;
+    createSymptomButton : function(component, symptom) {
+        var name = symptom["Name"];
 
-        var getSymptomsAction = component.get("c.getPossibleSymptoms");
+        $A.createComponent(
+            "c:pill",
+            {
+                "name": name
+            },
+            function(symptomButton, status, errorMessage) {
+                if (status === "SUCCESS" ){
+                    var body = component.get("v.body");
+                    body.push(symptomButton);
+                    component.set("v.body", body);
+                } else {
+                    return -1;
+                }
+            }
 
-        getSymptomsAction.setCallback(this, function(response) {
-            symptoms = response.getReturnValue();
-        });
 
-        $A.enqueueAction(getSymptomsAction);
+            // "c:statefulButton",
+            // {
+            //     "name": name,
+            // },
+            // function(symptomButton, status, errorMessage) {
+            //     if (status === "SUCCESS" ){
+            //         var body = component.get("v.body");
+            //         body.push(symptomButton);
+            //         component.set("v.body", body);
+            //     } else {
+            //         return -1;
+            //     }
+            // }
+        );
     },
 })

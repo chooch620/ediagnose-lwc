@@ -1,8 +1,7 @@
 import { LightningElement, api, track } from 'lwc';
 
-export default class EDiagnoseContainer extends LightningElement {
+export default class statefulButton extends LightningElement {
     @api name;
-    @api infermedicaId;
     @track isSelected = false;
 
     handleClick() {

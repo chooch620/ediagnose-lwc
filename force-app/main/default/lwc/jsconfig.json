@@ -3,17 +3,20 @@
         "experimentalDecorators": true,
         "baseUrl": ".",
         "paths": {
-            "c/EDiagnoseContainer": [
-                "EDiagnoseContainer/EDiagnoseContainer.js"
-            ],
             "c/eDiagnoseContainer": [
                 "eDiagnoseContainer/eDiagnoseContainer.js"
             ],
-            "c/StatefulButton": [
-                "StatefulButton/StatefulButton.js"
+            "c/patientGeneralInformationDev": [
+                "patientGeneralInformationDev/patientGeneralInformationDev.js"
+            ],
+            "c/pill": [
+                "pill/pill.js"
             ],
             "c/statefulButton": [
                 "statefulButton/statefulButton.js"
+            ],
+            "c/symptomSearchBoxDevLWC": [
+                "symptomSearchBoxDevLWC/symptomSearchBoxDevLWC.js"
             ]
         }
     },
