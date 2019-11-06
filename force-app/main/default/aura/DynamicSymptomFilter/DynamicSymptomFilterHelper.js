@@ -6,7 +6,11 @@
         action.setStorable();
 
         // For the initial search, use empty string.
-        const nameFilterString = component.find("nameFilter").get("v.value") || '';
+        const nameFilterString = component.find("nameFilter").get("v.value");
+
+        if (nameFilterString === undefined) {
+            return;
+        }
         
         action.setParams({
             name: nameFilterString

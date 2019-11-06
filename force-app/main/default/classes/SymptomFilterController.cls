@@ -10,6 +10,7 @@ public with sharing class SymptomFilterController {
                 FROM Symptom__c
                 WHERE Name LIKE :query
                 ORDER BY Name
+                LIMIT 10
             ];
         } else {
             return new List<Symptom__c>();
