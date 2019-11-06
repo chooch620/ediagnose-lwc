@@ -1,0 +1,30 @@
+<aura:component controller="SymptomFilterController">
+    <aura:attribute name="symptoms" type="Symptom__c[]"/>
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    <aura:registerEvent name="symptomSelectedEvent" type="c:SymptomSelectedEvent" />
+
+    <lightning:card title="Possible Symptoms">
+        <div class="search-field slds-m-left_medium">
+            <lightning:input aura:id="nameFilter" label="Filter names" onchange="{!c.handleNameFilterChange}" />
+        </div>
+        <div class="results slds-m-left_medium">
+            <aura:if isTrue="{!v.symptoms.length > 0}">
+                <p class="has-results">
+                Showing {!v.symptoms.length} symptom(s):
+                </p>
+                <ol class="slds-list_dotted">
+                    <aura:iteration items="{!v.symptoms}" var="symptom" aura:id="symptom-list">
+                        <li>
+                            <a class="symptom-name" onclick="{!c.handleClickSymptomName}" data-symptom-id="{!symptom.Id}" data-symptom-name="{!symptom.Name}">
+                            {!symptom.Name}
+                            </a>
+                        </li>
+                    </aura:iteration>
+                </ol>
+                <aura:set attribute="else">
+                    <p class="no-results">There are no symptoms that match your query.</p>
+                </aura:set>
+            </aura:if>
+        </div>
+    </lightning:card>
+</aura:component>

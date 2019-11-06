@@ -1,3 +1,10 @@
-<aura:component>
-    <c:SymptomList />
-</aura:component>	
+<aura:component implements="forceCommunity:availableForAllPageTypes">
+    <div class="slds-grid">
+        <div class="slds-col">
+            <c:DynamicSymptomFilter />
+        </div>
+        <div class="slds-col">
+            <c:SymptomList />
+        </div>
+    </div>    
+</aura:component>

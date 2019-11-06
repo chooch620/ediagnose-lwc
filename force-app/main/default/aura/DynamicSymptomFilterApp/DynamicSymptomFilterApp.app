@@ -1,3 +1,3 @@
 <aura:application extends="force:slds">
-    <c:eDiagnoseContainerComponent />
+    <c:DynamicSymptomFilter />
 </aura:application>

@@ -3,4 +3,9 @@ public with sharing class SymptomListController {
     public static List<Symptom__c> getPossibleSymptoms(){
         return [SELECT Name FROM Symptom__c];
     }
+
+    @AuraEnabled
+    public static List<Map<String,Object>> callEdiagnose(List<String> symptoms){
+        return eDiagnoseRequester.getConditions(21, 'male', symptoms);
+    }
 }

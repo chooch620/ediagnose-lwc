@@ -14,7 +14,7 @@ public class eDiagnoseRequester {
         HttpRequest request = new HttpRequest();
 
         // Set the endpoint
-        request.setEndpoint('https://api.infermedica.com/v2/diagnosis');
+        request.setEndpoint('callout:InfermedicaAppKey/diagnosis');
         // Set HTTP Request Type
         request.setMethod('POST');
 
@@ -33,8 +33,8 @@ public class eDiagnoseRequester {
         // String appKey = appKeySR.Body.toString();
 
         // Set additional headers
-        request.setHeader('App-Id', '0e4015bd');
-        request.setHeader('App-Key', 'dfd491caa747140e7f21c5df07162c76');
+        request.setHeader('App-Id', '{!$Credential.UserName}');
+        request.setHeader('App-Key', '{!$Credential.Password}');
         request.setHeader('Content-Type', 'application/json');
 
         // Set the body

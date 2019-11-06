@@ -1,12 +1,17 @@
 <aura:component implements="flexipage:availableForAllPageTypes" controller="SymptomListController">
-    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
     <aura:attribute name="possibleSymptoms" type="Symptom__c[]" />
+    <aura:attribute name="selectedSymptoms" type="Symptom__c[]" />
 
-    <lightning:card title="Symptoms">
+    <aura:handler event="c:SymptomSelectedEvent" action="{!c.handleSymptomSelected}"/>
+
+    <lightning:card title="Selected Symptoms">
         <div class="slds-p-left_medium">
-            <aura:iteration items="{!v.possibleSymptoms}" var="symptom">
+            <aura:iteration items="{!v.selectedSymptoms}" var="symptom">
                 <c:SymptomListLineItem symptom="{!symptom}" />
             </aura:iteration>
         </div>
     </lightning:card>
+
+    <lightning:button variant="base" label="Get Conditions" title="Get Conditions" onclick="{!c.getConditions}"/>
+
 </aura:component>

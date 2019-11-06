@@ -2,21 +2,49 @@
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
         <members>eDiagnoseRequester</members>
+        <members>eDiagnoseCaller</members>
+        <members>SymptomListController</members>
+        <members>SymptomFilterController</members>
         <name>ApexClass</name>
     </types>
     <types>
+        <members>DynamicSymptomFilter</members>
+        <members>DynamicSymptomFilterApp</members>
+        <members>eDiagnoseApp</members>
+        <members>eDiagnoseContainerComponent</members>
         <members>SymptomList</members>
         <members>SymptomListLineItem</members>
+        <members>SymptomSelectedEvent</members>
         <name>AuraDefinitionBundle</name>
     </types>
     <types>
         <members>eDiagnoseContainer</members>
         <members>statefulButton</members>
+        <members>pill</members>
         <name>LightningComponentBundle</name>
     </types>
     <types>
-        <members>*</members>
-        <name>StaticResource</name>
+        <members>Symptom__c</members>
+        <members>Condition__c</members>
+        <members>Doctor__c</members>
+        <name>CustomObject</name>
+    </types>
+    <types>
+        <members>InfermedicaAppKey</members>
+        <name>NamedCredential</name>
+    </types>
+    <!-- Communities -->
+    <types>
+        <members>eDiagnose</members>
+        <name>Network</name>
+    </types>
+    <types>
+        <members>eDiagnose</members>
+        <name>CustomSite</name>
+    </types>
+    <types>
+        <members>eDiagnose1</members>
+        <name>SiteDotCom</name>
     </types>
     <version>47.0</version>
 </Package>

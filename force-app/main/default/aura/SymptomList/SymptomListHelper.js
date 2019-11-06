@@ -1,13 +1,21 @@
 ({
-    getSymptoms : function(component) {
-        var symptoms = [];
+    symptomAlreadySelected : function(selectedSymptoms, selectedSymptom) {
+        var found = false;
+        for(var i = 0; i < selectedSymptoms.length; i++) {
+            if (selectedSymptoms[i].Name == selectedSymptom.Name) {
+                found = true;
+                break;
+            }
+        }
+        return found;
+    },
 
-     var getSymptomsAction = component.get("c.getPossibleSymptoms");
-
-     getSymptomsAction.setCallback(this, function(response) {
-         symptoms = response.getReturnValue();
-     });
-
-     $A.enqueueAction(getSymptomsAction);
- },
+    alreadySelectedToast: function() {
+        var toastEvent = $A.get("e.force:showToast");
+        toastEvent.setParams({
+            "title": "Already Selected",
+            "message": "This symptom has already been selected."
+        });
+        toastEvent.fire();
+    },
 })
