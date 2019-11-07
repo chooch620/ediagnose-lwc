@@ -5,12 +5,16 @@
 
     handleClickSymptomName: function (component, event, helper) {
         const target = event.currentTarget;
-        const symptomId = target.dataset.symptomId;
-        const symptomName = target.dataset.symptomName;
+
+        const symptom = {
+            "Id": target.dataset.id,
+            "Name": target.dataset.name,
+            "InfermedicaId__c": target.dataset.infermedicaId
+        }
 
         var symptomSelectedEvent = $A.get("e.c:SymptomSelectedEvent");
         symptomSelectedEvent.setParams({
-            "symptom": {"Id":symptomId,"Name":symptomName}
+            "symptom": symptom
         });
 
         symptomSelectedEvent.fire();

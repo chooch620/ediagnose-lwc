@@ -17,6 +17,7 @@
         });
 
         action.setCallback(this, function(response) {
+            var symps = response.getReturnValue();
             component.set("v.symptoms", response.getReturnValue());
         });
         

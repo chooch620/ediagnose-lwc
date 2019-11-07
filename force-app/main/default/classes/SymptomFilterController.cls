@@ -6,7 +6,7 @@ public with sharing class SymptomFilterController {
         System.debug('query: ' + query);
         if (Schema.sObjectType.Symptom__c.isAccessible()) {
             return [
-                SELECT Id, Name
+                SELECT Id, Name, InfermedicaId__c
                 FROM Symptom__c
                 WHERE Name LIKE :query
                 ORDER BY Name

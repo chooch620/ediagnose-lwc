@@ -1,4 +1,7 @@
 <aura:component implements="forceCommunity:availableForAllPageTypes">
+    <aura:attribute name="possibleConditions" type="Condition__c[]" />
+    <aura:handler event="c:DiagnosisReceivedEvent" action="{!c.handleDiagnosisReceived}"/>
+
     <div class="slds-grid">
         <div class="slds-col">
             <c:DynamicSymptomFilter />
@@ -7,4 +10,13 @@
             <c:SymptomList />
         </div>
     </div>    
+    
+    <lightning:card title="Possible Conditions">
+        <aura:if isTrue="{!v.possibleConditions.length != 0}">
+            <c:possibleConditions possibleConditions="{!v.possibleConditions}"/>
+            <aura:set attribute="else">
+                No conditions found. Please select symptoms and press the Get Conditions button to get a diagnosis.
+            </aura:set>
+        </aura:if>
+    </lightning:card>
 </aura:component>

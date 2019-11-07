@@ -12,18 +12,24 @@
     },
 
     getConditions : function(component, event, helper) {
-        var selectedSymptoms = component.get("v.selectedSymptoms");
+        let selectedSymptoms = component.get("v.selectedSymptoms");
 
         var action = component.get("c.callEdiagnose");
 
-        var symptoms = ["s_8","s_21","s_102"];
-
         action.setParams({
-            "symptoms":symptoms
+            "symptoms":selectedSymptoms
         });
 
         action.setCallback(this, function(response) {
             var conditions = response.getReturnValue();
+            
+            var diagnosisReceivedEvent = $A.get("e.c:DiagnosisReceivedEvent");
+            diagnosisReceivedEvent.setParams({
+                "possibleConditions": conditions
+            });
+    
+            diagnosisReceivedEvent.fire();
+
 
             console.log(`conditions: ${conditions}`);
         });

@@ -1,0 +1,12 @@
+<template>
+    <div class="slds-m-around_medium">
+        conditions: {possibleConditions}
+        <lightning-accordion allow-multiple-sections-open>
+            <template for:each={possibleConditions} for:item="condition">
+                    <lightning-accordion-section label={condition.Name} key={condition.Id}>
+                        <p>{condition.Name}.</p>
+                    </lightning-accordion-section>
+            </template>
+        </lightning-accordion>
+    </div>
+</template>

@@ -14,8 +14,12 @@
                 </p>
                 <ol class="slds-list_dotted">
                     <aura:iteration items="{!v.symptoms}" var="symptom" aura:id="symptom-list">
+                        Symptom: {!symptom.InfermedicaId__c}
                         <li>
-                            <a class="symptom-name" onclick="{!c.handleClickSymptomName}" data-symptom-id="{!symptom.Id}" data-symptom-name="{!symptom.Name}">
+                            <a class="symptom-name" onclick="{!c.handleClickSymptomName}" 
+                                data-id="{!symptom.Id}" 
+                                data-name="{!symptom.Name}" 
+                                data-infermedica-id="{!symptom.InfermedicaId__c}">
                             {!symptom.Name}
                             </a>
                         </li>
