@@ -37,18 +37,5 @@
         <members>InfermedicaAppKey</members>
         <name>NamedCredential</name>
     </types>
-    <!-- Communities -->
-    <types>
-        <members>eDiagnose</members>
-        <name>Network</name>
-    </types>
-    <types>
-        <members>eDiagnose</members>
-        <name>CustomSite</name>
-    </types>
-    <types>
-        <members>eDiagnose1</members>
-        <name>SiteDotCom</name>
-    </types>
     <version>47.0</version>
 </Package>
