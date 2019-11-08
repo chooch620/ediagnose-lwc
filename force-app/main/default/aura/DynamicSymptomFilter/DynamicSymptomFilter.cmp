@@ -14,7 +14,6 @@
                 </p>
                 <ol class="slds-list_dotted">
                     <aura:iteration items="{!v.symptoms}" var="symptom" aura:id="symptom-list">
-                        Symptom: {!symptom.InfermedicaId__c}
                         <li>
                             <a class="symptom-name" onclick="{!c.handleClickSymptomName}" 
                                 data-id="{!symptom.Id}" 

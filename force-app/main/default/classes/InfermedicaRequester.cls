@@ -1,87 +1,36 @@
-public class eDiagnoseRequester {
-	@AuraEnabled
-    public static List<Map<String,Object>> getConditions(Integer age, String sex, List<String> symptoms) {
+/**
+ * @File Name          : InfermedicaRequester.cls
+ * @Description        : 
+ * @Author             : Matthew Ruiz
+ * @Group              : 
+ * @Last Modified By   : Matthew Ruiz
+ * @Last Modified On   : 11/8/2019, 12:13:41 AM
+ * @Modification Log   : 
+ * Ver       Date            Author      		    Modification
+ * 1.0    11/7/2019   Matthew Ruiz     Initial Version
+**/
+public with sharing class InfermedicaRequester {
+    @AuraEnabled
+    public static List<Object> getPossibleConditions(Integer age, String sex, List<CustomSymptom> symptoms){
+        List<Object> possibleConditions = new List<CustomCondition>();
 
-        List<Map<String,Object>> possibleConditions = new List<Map<String,Object>>();
-
-        // API requires that sex must be 'male' or 'female'
+        // Infermedica API requires that sex must be 'male' or 'female'
         String querySex = (sex == 'other') ? 'female' : sex;        
-        // API requires that age must be a positive integer between 0 and 130
+        // Infermedica API requires that age must be a positive integer between 0 and 130
         Integer queryAge = (0 < age && age < 130) ? age : 20;
 
         // Create the request
         Http http = new Http();
-        HttpRequest request = new HttpRequest();
-
-        // Set the endpoint
-        request.setEndpoint('callout:InfermedicaAppKey/diagnosis');
-        // Set HTTP Request Type
-        request.setMethod('POST');
-
-        // Set additional headers
-        request.setHeader('App-Id', '{!$Credential.UserName}');
-        request.setHeader('App-Key', '{!$Credential.Password}');
-        request.setHeader('Content-Type', 'application/json');
-
-        // Set the body
-        Map<String, Object> body = new Map<String, Object>();
-        List<Map<String, Object>> evidence = new List<Map<String, Object>>();
-
-        for (String symptomId : symptoms) {
-            Map<String, Object> symptomObj  = new Map<String, Object>();
-            symptomObj.put('choice_id', 'present');
-            symptomObj.put('id', symptomId);
-            evidence.add(symptomObj);
-        }
-
-        body.put('evidence', evidence);
-        body.put('age', queryAge);
-        body.put('sex', querySex);
-
-		String bodyJSON = JSON.serialize(body);
-
-        request.setBody(bodyJSON);
+        HttpRequest request = buildInfermedicaDiagnosisRequest(queryAge, querySex, symptoms);
 
         HttpResponse response = http.send(request);
-
-        if (response.getStatusCode() == 200) {
-
-            Map<String, Object> results = (Map<String, Object>)JSON.deserializeUntyped(response.getBody());
-            List<Object> conditions = (List<Object>)results.get('conditions');
-
-            for (Object cond : conditions) {
-                Object c = JSON.deserialize(
-                    JSON.serialize(cond), CustomCondition.class);
-                    System.debug('c: ' + c);
-                Map<String, Object> conditionInfo = new Map<String,Object>();
-                Map<String, Object> condMap = (Map<String, Object>)cond;
-                conditionInfo.put('name', (String)condMap.get('name'));
-                conditionInfo.put('common_name', (String)condMap.get('common_name'));
-                conditionInfo.put('probability', (Double)condMap.get('probability'));
-
-                possibleConditions.add(conditionInfo);
-            }
-        }
-
-        return possibleConditions;
+        
+        return EDiagnosisResponseHandlerController.handleDiagnosisResponse(response);
+        
+        // return possibleConditions;
     }
 
-    @AuraEnabled
-    public static List<CustomCondition> getPossibleConditions(Integer age, String sex, List<String> symptoms){
-        List<CustomCondition> possibleConditions = new List<CustomCondition>();
-
-        // API requires that sex must be 'male' or 'female'
-        String querySex = (sex == 'other') ? 'female' : sex;        
-        // API requires that age must be a positive integer between 0 and 130
-        Integer queryAge = (0 < age && age < 130) ? age : 20;
-
-        // Create the request
-        Http http = new Http();
-        HttpRequest request = buildInfermedicaDiagnosisRequest(queryAge, querySex);
-        return possibleConditions;
-    }
-
-    private static HttpRequest buildInfermedicaDiagnosisRequest(Integer age, String sex) {
+    private static HttpRequest buildInfermedicaDiagnosisRequest(Integer age, String sex, List<CustomSymptom> symptoms) {
         HttpRequest request = new HttpRequest();
         
         // Set the endpoint
@@ -93,6 +42,19 @@ public class eDiagnoseRequester {
         request.setHeader('App-Id', '{!$Credential.UserName}');
         request.setHeader('App-Key', '{!$Credential.Password}');
         request.setHeader('Content-Type', 'application/json');
+
+        Map<String, Object> body = new Map<String, Object>();
+
+        body.put('evidence', symptoms);
+        body.put('age', age);
+        body.put('sex', sex);
+
+        String serializedBody = JSON.serialize(body);
+        
+        String bodyString = 'INFERMEDICA_READY body: ' + serializedBody;
+        DebugWrappers.info(bodyString);
+
+        request.setBody(serializedBody);
 
         return request;
     }
@@ -118,12 +80,15 @@ public class eDiagnoseRequester {
         }
     }
 
+
     /**
         Handle a successful HttpResponse.
         Parse the JSON returned into a Map<String, String>
         containing key=Id, value=Name of symptoms and export to 
         a CSV file.
         String path specifies where to save the CSV file. 
+
+        Author: https://github.com/garrettmaddox
      */
     private static void handleResponse(HttpResponse response, String path) {
                 
@@ -131,7 +96,7 @@ public class eDiagnoseRequester {
 
         List<Map<String, Object>> apiValues = new List<Map<String, Object>>();
         for (Object a : api) {
-            apiValues.add(convertToMap(a));
+            apiValues.add(TypeConversions.convertToMapStringObject(a));
         }
 
         // Get the name and id of each symptom and put them in a map
@@ -143,6 +108,8 @@ public class eDiagnoseRequester {
     /**
         Extract a Map<String, String>--where key is the Infermedica Id for a symptom
         and value is the name of the symptom--from a List<Map<String, Object>>
+
+        Author: https://github.com/garrettmaddox
      */
     private static Map<String, String> extractIdAndName(List<Map<String, Object>> inputMaps) {
          
@@ -161,6 +128,8 @@ public class eDiagnoseRequester {
         Given a Map<String, String> where the key is an Infermedica Id
         for a symptom and the value is the name of the symptom,
         export a csv file with the header Id,Common Name
+
+        Author: https://github.com/garrettmaddox
      */
     private static void exportCSV(Map<String, String> symptomMap, String path) {
 
@@ -187,12 +156,5 @@ public class eDiagnoseRequester {
             pathOnClient = '/' + path + '.csv' // complete path of the document
         );    
         insert file;
-    }
-
-    /**
-        Cast an Object to Map<String, Object>
-     */
-    private static Map<String, Object> convertToMap(Object obj) {
-        return (Map<String, Object>)obj;
     }
 }

@@ -30,3 +30,6 @@ $RECYCLE.BIN/
 .settings
 
 .prettierrc
+
+#We don't want to include large csv files
+data/

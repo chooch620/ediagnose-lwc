@@ -12,17 +12,14 @@
             "c/pill": [
                 "pill/pill.js"
             ],
+            "c/possibleConditions": [
+                "possibleConditions/possibleConditions.js"
+            ],
             "c/statefulButton": [
                 "statefulButton/statefulButton.js"
             ],
             "c/symptomSearchBoxDevLWC": [
                 "symptomSearchBoxDevLWC/symptomSearchBoxDevLWC.js"
-            ],
-            "c/PossibleConditions": [
-                "PossibleConditions/PossibleConditions.js"
-            ],
-            "c/possibleConditions": [
-                "possibleConditions/possibleConditions.js"
             ]
         }
     },

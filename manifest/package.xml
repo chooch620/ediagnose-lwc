@@ -3,10 +3,12 @@
     <types>
         <members>CustomCondition</members>
         <members>CustomSymptom</members>
-        <members>eDiagnoseCaller</members>
-        <members>eDiagnoseRequester</members>
+        <members>DebugWrappers</members>
+        <members>InfermedicaRequester</members>
+        <members>InfermedicaResponseHandlerController</members>
         <members>SymptomListController</members>
         <members>SymptomFilterController</members>
+        <members>TypeConversions</members>
         <name>ApexClass</name>
     </types>
     <types>
