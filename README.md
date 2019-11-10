@@ -1,7 +1,7 @@
 
 ## eDiagnose
 
-eDiagnose serves as a symptom checker. By leveraging the [Infermedica API](https://developer.infermedica.com/), eDiagnose can provide users with a list of possible conditions based on symptoms selected. 
+eDiagnose serves as a symptom checker. By leveraging the [Infermedica API](https://developer.infermedica.com/), eDiagnose can help users get the right care when they're sick.
 
 ## Notes
 
