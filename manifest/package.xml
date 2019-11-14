@@ -3,6 +3,9 @@
     <types>
         <members>CustomSymptom</members>
         <members>DebugWrappers</members>
+        <members>DiagnosisService</members>
+        <members>HttpMethods</members>
+        <members>InfermedicaEndpoints</members>
         <members>InfermedicaRequester</members>
         <members>InfermedicaResponseHandlerController</members>
         <members>SymptomListController</members>
