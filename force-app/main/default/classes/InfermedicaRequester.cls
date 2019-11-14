@@ -4,57 +4,31 @@
  * @Author             : Matthew Ruiz
  * @Group              : 
  * @Last Modified By   : Matthew Ruiz
- * @Last Modified On   : 11/8/2019, 12:13:41 AM
+ * @Last Modified On   : 11/8/2019, 4:20:47 PM
  * @Modification Log   : 
  * Ver       Date            Author      		    Modification
  * 1.0    11/7/2019   Matthew Ruiz     Initial Version
 **/
 public with sharing class InfermedicaRequester {
-    @AuraEnabled
-    public static List<Object> getPossibleConditions(Integer age, String sex, List<CustomSymptom> symptoms){
-        List<Object> possibleConditions = new List<CustomCondition>();
 
-        // Infermedica API requires that sex must be 'male' or 'female'
-        String querySex = (sex == 'other') ? 'female' : sex;        
-        // Infermedica API requires that age must be a positive integer between 0 and 130
-        Integer queryAge = (0 < age && age < 130) ? age : 20;
-
-        // Create the request
-        Http http = new Http();
-        HttpRequest request = buildInfermedicaDiagnosisRequest(queryAge, querySex, symptoms);
-
-        HttpResponse response = http.send(request);
-        
-        return EDiagnosisResponseHandlerController.handleDiagnosisResponse(response);
-        
-        // return possibleConditions;
+    public static HttpRequest buildRequest(InfermedicaEndpoints endpoint, String method, String appId, String appKey, String contentType) { 
+        return buildRequest(endpoint, method, appId, appKey, null);
     }
 
-    private static HttpRequest buildInfermedicaDiagnosisRequest(Integer age, String sex, List<CustomSymptom> symptoms) {
+    public static HttpRequest buildRequest(InfermedicaEndpoints endpoint, String method, String appId, String appKey, String contentType, String serializedBody) {
         HttpRequest request = new HttpRequest();
-        
+
         // Set the endpoint
-        request.setEndpoint('callout:InfermedicaAppKey/diagnosis');
+        request.setEndpoint('callout:InfermedicaAppKey/' + endpoint.name().toLowerCase());
         // Set HTTP Request Type
-        request.setMethod('POST');
+        request.setMethod(method);
 
         // Set additional headers
-        request.setHeader('App-Id', '{!$Credential.UserName}');
-        request.setHeader('App-Key', '{!$Credential.Password}');
-        request.setHeader('Content-Type', 'application/json');
-
-        Map<String, Object> body = new Map<String, Object>();
-
-        body.put('evidence', symptoms);
-        body.put('age', age);
-        body.put('sex', sex);
-
-        String serializedBody = JSON.serialize(body);
+        request.setHeader('App-Id', appId);
+        request.setHeader('App-Key', appKey);
+        request.setHeader('Content-Type', contentType);
         
-        String bodyString = 'INFERMEDICA_READY body: ' + serializedBody;
-        DebugWrappers.info(bodyString);
-
-        request.setBody(serializedBody);
+        if (serializedBody != null) { request.setBody(serializedBody); }
 
         return request;
     }
@@ -73,14 +47,20 @@ public with sharing class InfermedicaRequester {
         request.setHeader('App-Key', '{!$Credential.Password}');
         request.setHeader('Content-Type', 'application/json');
 
+        String appId = '{!$Credential.UserName}';
+        String appKey = '{!$Credential.Password}';
+        String contentType = 'application/json';
+        String method = HttpMethods.getRequest;
+
+        request = buildRequest(InfermedicaEndpoints.SYMPTOMS, method, appId, appKey, contentType);
+
         HttpResponse response = http.send(request);
 
         if (response.getStatusCode() == 200) {
             handleResponse(response, 'symptoms');
         }
     }
-
-
+    
     /**
         Handle a successful HttpResponse.
         Parse the JSON returned into a Map<String, String>

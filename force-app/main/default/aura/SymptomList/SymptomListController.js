@@ -14,7 +14,7 @@
     getConditions : function(component, event, helper) {
         let selectedSymptoms = component.get("v.selectedSymptoms");
 
-        var action = component.get("c.callEdiagnose");
+        var action = component.get("c.getPossibleConditions");
 
         action.setParams({
             "symptoms":selectedSymptoms
@@ -22,7 +22,8 @@
 
         action.setCallback(this, function(response) {
             var conditions = response.getReturnValue();
-            
+            console.log(`conditions: ${JSON.stringify(conditions)}`);
+
             var diagnosisReceivedEvent = $A.get("e.c:DiagnosisReceivedEvent");
             diagnosisReceivedEvent.setParams({
                 "possibleConditions": conditions

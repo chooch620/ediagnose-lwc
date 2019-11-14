@@ -1,5 +1,5 @@
 <aura:component implements="forceCommunity:availableForAllPageTypes">
-    <aura:attribute name="possibleConditions" type="Condition__c[]" />
+    <aura:attribute name="possibleConditions" type="Object[]" />
     <aura:handler event="c:DiagnosisReceivedEvent" action="{!c.handleDiagnosisReceived}"/>
 
     <div class="slds-grid">

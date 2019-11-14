@@ -1,10 +1,15 @@
-import { LightningElement, api, track } from 'lwc';
+import { LightningElement, api } from 'lwc';
 
 export default class PossibleConditions extends LightningElement {
     @api possibleConditions = [];
-    @track activeSections = ['A', 'B'];
+
+    connectedCallback() {
+        console.log(`possibleConditions: ${JSON.stringify(this.possibleConditions)}`);
+    }
 
     isPossibleConditionsEmpty() {
         return this.possibleConditions.length === 0
     }
+
+    
 }

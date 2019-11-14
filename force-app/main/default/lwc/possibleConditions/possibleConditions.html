@@ -1,10 +1,21 @@
+<!--
+  @File Name          : possibleConditions.html
+  @Description        : 
+  @Author             : Matthew Ruiz
+  @Group              : 
+  @Last Modified By   : Matthew Ruiz
+  @Last Modified On   : 11/9/2019, 12:00:28 AM
+  @Modification Log   : 
+  Ver       Date            Author      		    Modification
+  1.0    11/8/2019   Matthew Ruiz     Initial Version
+-->
 <template>
     <div class="slds-m-around_medium">
         conditions: {possibleConditions}
         <lightning-accordion allow-multiple-sections-open>
             <template for:each={possibleConditions} for:item="condition">
-                    <lightning-accordion-section label={condition.Name} key={condition.Id}>
-                        <p>{condition.Name}.</p>
+                    <lightning-accordion-section label={condition.name} key={condition.id}>
+                        <p>{condition.name}</p>
                     </lightning-accordion-section>
             </template>
         </lightning-accordion>
