@@ -1,14 +1,3 @@
-/**
- * @File Name          : InfermedicaResponseHandlerController.cls
- * @Description        : 
- * @Author             : Matthew Ruiz
- * @Group              : 
- * @Last Modified By   : Matthew Ruiz
- * @Last Modified On   : 11/8/2019, 12:16:03 AM
- * @Modification Log   : 
- * Ver       Date            Author      		    Modification
- * 1.0    11/8/2019   Matthew Ruiz     Initial Version
-**/
 public with sharing class InfermedicaResponseHandlerController {
     public static List<InfermedicaCondition> handleDiagnosisResponse(HttpResponse response) {
         Integer statusCode = response.getStatusCode();

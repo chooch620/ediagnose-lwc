@@ -1,5 +1,4 @@
 public with sharing class DiagnosisService {
-    @AuraEnabled
     public static List<Object> getPossibleConditions(Integer age, String sex, List<CustomSymptom> symptoms){
 
         // Infermedica API requires that sex must be 'male' or 'female'
@@ -23,7 +22,7 @@ public with sharing class DiagnosisService {
         
     }
 
-    private static String createSerializedBody(Integer age, String sex, List<CustomSymptom> symptoms) {
+    public static String createSerializedBody(Integer age, String sex, List<CustomSymptom> symptoms) {
         Map<String, Object> body = new Map<String, Object>();
 
         body.put('evidence', symptoms);
