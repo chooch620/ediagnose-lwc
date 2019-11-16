@@ -3,10 +3,27 @@ public class CustomSymptomTests {
     @isTest
     public static void testCustomSymptomConstructor() {
 
-        String mockInfermedicaId = 's_123';
-        CustomSymptom mockCustomSymptom = new CustomSymptom(mockInfermedicaId);
+        // Valid InfermedicaId 
+        String mockValidInfermedicaId = 's_123';
+        CustomSymptom mockValidCustomSymptom = new CustomSymptom(mockValidInfermedicaId);
         
-        System.assert(mockCustomSymptom.Id != null);
-        System.assertEquals(mockCustomSymptom.choice_id, 'present');
+        System.assert(mockValidCustomSymptom.Id != null);
+        System.assertEquals(mockValidCustomSymptom.choice_id, 'present');
+
+        // Invalid InfermedicaId
+        String mockInvaludInfermedicaId = '123';
+        Boolean invalidInfermedicaIdExceptionCaught = false;
+        String expectedInvalidInfermedicaIdExceptionMessage = 'InfermedicaId provided does not start with an s';
+        String actualInvalidInfermedicaIdExceptionMessage = '';
+
+        try {
+            CustomSymptom mockInvalidCustomSymptom = new CustomSymptom(mockInvaludInfermedicaId);
+        } catch (InvalidInfermedicaIdException iie) {
+            invalidInfermedicaIdExceptionCaught = true;
+            actualInvalidInfermedicaIdExceptionMessage = iie.getMessage();
+        }
+
+        System.assert(invalidInfermedicaIdExceptionCaught);
+        System.assertEquals(expectedInvalidInfermedicaIdExceptionMessage, actualInvalidInfermedicaIdExceptionMessage);
     }
 }

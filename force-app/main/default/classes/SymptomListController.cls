@@ -32,7 +32,7 @@ public with sharing class SymptomListController {
     * @param symptoms List of Objects, which mimicthe Symptom__c sObject
     * @return List<CustomSymptom> 
     **/
-    private static List<CustomSymptom> getSympmtoms(List<Object> symptoms) {
+    @TestVisible private static List<CustomSymptom> getSympmtoms(List<Object> symptoms) {
         List<CustomSymptom> customSymptoms = new List<CustomSymptom>();
 
         for (Object symptom: symptoms) {
@@ -52,7 +52,7 @@ public with sharing class SymptomListController {
     * @param symptom Object sent by client-side. {Id,Name,InfermedicaId__c}
     * @return CustomSymptom 
     **/
-    private static CustomSymptom extractSymptom(Object symptom) {
+    @TestVisible private static CustomSymptom extractSymptom(Object symptom) {
         Map<Object, Object> symptomMap = TypeConversions.convertToMapObjectObject(symptom);
 
         for (Object key: symptomMap.keySet()) {
@@ -62,6 +62,4 @@ public with sharing class SymptomListController {
         }
         throw new InfermedicaIdNotFoundException();
     }
-
-    public class InfermedicaIdNotFoundException extends Exception {}
 }

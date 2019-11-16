@@ -1,4 +1,5 @@
 public with sharing class DiagnosisService {
+
     public static List<Object> getPossibleConditions(Integer age, String sex, List<CustomSymptom> symptoms){
 
         // Infermedica API requires that sex must be 'male' or 'female'

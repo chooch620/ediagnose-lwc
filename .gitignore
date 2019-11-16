@@ -33,3 +33,5 @@ $RECYCLE.BIN/
 
 #We don't want to include large csv files
 data/
+
+.vscode

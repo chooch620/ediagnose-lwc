@@ -1,14 +1,3 @@
-/**
- * @File Name          : TypeConversions.cls
- * @Description        : This class contains utility methods for converting between common data types. 
- * @Author             : Matthew Ruiz
- * @Group              : 
- * @Last Modified By   : Matthew Ruiz
- * @Last Modified On   : 11/7/2019, 8:02:07 PM
- * @Modification Log   : 
- * Ver       Date            Author      		    Modification
- * 1.0    11/7/2019   Matthew Ruiz     Initial Version
-**/
 public with sharing class TypeConversions {
     
     /**
