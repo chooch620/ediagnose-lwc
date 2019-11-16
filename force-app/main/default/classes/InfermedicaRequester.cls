@@ -12,7 +12,7 @@
 public with sharing class InfermedicaRequester {
 
     public static HttpRequest buildRequest(InfermedicaEndpoints endpoint, String method, String appId, String appKey, String contentType) { 
-        return buildRequest(endpoint, method, appId, appKey, null);
+        return buildRequest(endpoint, method, appId, appKey, contentType, null);
     }
 
     public static HttpRequest buildRequest(InfermedicaEndpoints endpoint, String method, String appId, String appKey, String contentType, String serializedBody) {
