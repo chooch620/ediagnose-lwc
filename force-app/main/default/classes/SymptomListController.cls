@@ -1,15 +1,3 @@
-/**
- * @File Name          : SymptomListController.cls
- * @Description        : 
- * @Author             : Matthew Ruiz
- * @Group              : 
- * @Last Modified By   : Matthew Ruiz
- * @Last Modified On   : 11/8/2019, 4:21:48 PM
- * @Modification Log   : 
- * Ver       Date            Author      		    Modification
- * 1.0    11/7/2019   Matthew Ruiz     Initial Version
-**/
-
 public with sharing class SymptomListController {
 
     private static final String SYMPTOM_WITHOUT_INFERMEDICA_ID = 'Symptom was passed without an InfermedicaId: ';

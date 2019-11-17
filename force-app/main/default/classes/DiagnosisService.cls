@@ -19,7 +19,7 @@ public with sharing class DiagnosisService {
         HttpRequest request = InfermedicaRequester.buildRequest(InfermedicaEndpoints.DIAGNOSIS, HttpMethods.getRequest, appId, appKey, contentType, serializedBody);
         HttpResponse response = http.send(request);
         
-        return EDiagnosisResponseHandlerController.handleDiagnosisResponse(response);
+        return InfermedicaResponseHandlerController.handleDiagnosisResponse(response);
         
     }
 

@@ -1,5 +1,6 @@
 public with sharing class InfermedicaResponseHandlerController {
     public static List<InfermedicaCondition> handleDiagnosisResponse(HttpResponse response) {
+        System.debug('resp body: ' + response.getBody());
         Integer statusCode = response.getStatusCode();
 
         if (statusCode == 200) {
@@ -29,27 +30,27 @@ public with sharing class InfermedicaResponseHandlerController {
         public InfermedicaExtras extras { get;set; }
     }
 
-    private with sharing class InfermedicaQuestion {
+    @TestVisible private with sharing class InfermedicaQuestion {
         public String type { get;set; }
         public String text { get;set; }
         public List<InfermedicaItem> items { get;set; }
         public InfermedicaExtras extras { get;set; }
     }
 
-    private with sharing class InfermedicaItem {
+    @TestVisible private with sharing class InfermedicaItem {
         public String id { get;set; }
         public String name { get;set; }
         public List<InfermedicaChoice> choices { get;set; }
     }
 
-    private with sharing class InfermedicaChoice {
+    @TestVisible private with sharing class InfermedicaChoice {
         public String id { get;set; }
         public String label { get;set; }
     }
 
-    private with sharing class InfermedicaExtras {} 
+    @TestVisible private with sharing class InfermedicaExtras {} 
 
-    private with sharing class InfermedicaCondition {
+    @TestVisible private with sharing class InfermedicaCondition {
         public String id { get;set; }
         public String name { get;set; }
         public String common_name { get;set; }
