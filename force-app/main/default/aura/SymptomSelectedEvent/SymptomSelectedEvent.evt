@@ -1,3 +1,15 @@
 <aura:event type="APPLICATION" description="Event template"> 
     <aura:attribute name="symptom" type="Symptom__c" />
 </aura:event>
+
+<!--
+    11/17
+    eDiagnoseContainerComponent will now be in charge of keeping a running list of selectedSymptoms and possibleConditions. 
+        - getConditionsButton needs the selectedSymptoms
+            - They will come from DynaicSymptomFilter which will send a component event to the container.
+        - symptomList needs the selectedSymptoms as well.
+            - Same thing, the container will be in charge of maintaining the selectedSymptoms
+        
+    Will most likely have to change this event to a COMPONENT event and handle it within the component.
+    
+-->

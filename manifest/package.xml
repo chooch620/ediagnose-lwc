@@ -29,6 +29,7 @@
         <members>pill</members>
         <members>possibleConditions</members>
         <members>statefulButton</members>
+        <members>getConditionsButton</members>
         <name>LightningComponentBundle</name>
     </types>
     <types>

@@ -1,5 +1,7 @@
 <aura:component controller="SymptomFilterController">
     <aura:attribute name="symptoms" type="Symptom__c[]"/>
+    <aura:attribute name="selectedSymptoms" type="Symptom__c" />
+
     <aura:handler name="init" value="{!this}" action="{!c.init}" />
     <aura:registerEvent name="symptomSelectedEvent" type="c:SymptomSelectedEvent" />
 

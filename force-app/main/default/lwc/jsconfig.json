@@ -6,6 +6,9 @@
             "c/eDiagnoseContainer": [
                 "eDiagnoseContainer/eDiagnoseContainer.js"
             ],
+            "c/getConditionsButton": [
+                "getConditionsButton/getConditionsButton.js"
+            ],
             "c/patientGeneralInformationDev": [
                 "patientGeneralInformationDev/patientGeneralInformationDev.js"
             ],
