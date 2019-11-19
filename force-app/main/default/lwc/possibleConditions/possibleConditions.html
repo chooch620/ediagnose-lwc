@@ -3,9 +3,13 @@
         conditions: {possibleConditions}
         <lightning-accordion allow-multiple-sections-open>
             <template for:each={possibleConditions} for:item="condition">
-                    <lightning-accordion-section label={condition.name} key={condition.id}>
-                        <p>{condition.name}</p>
-                    </lightning-accordion-section>
+                    <!-- ConditionId: {condition.detail.Id} -->
+                    <li key={condition.Id}>
+                        ConditionName: {condition.Name}
+                        <lightning-accordion-section label="test">
+                            <p>{condition.Name}</p>
+                        </lightning-accordion-section>
+                    </li>
             </template>
         </lightning-accordion>
     </div>

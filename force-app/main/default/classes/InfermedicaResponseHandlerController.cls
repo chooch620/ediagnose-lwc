@@ -7,6 +7,7 @@ public with sharing class InfermedicaResponseHandlerController {
             InfermedicaDiagnosisResponse diagnosisResponse = (InfermedicaDiagnosisResponse)JSON.deserialize(response.getBody(), InfermedicaDiagnosisResponse.class);
 
             upsertConditions(diagnosisResponse.conditions);
+            System.debug('conditions: ' + diagnosisResponse.conditions);
             return diagnosisResponse.conditions;
         }
 
