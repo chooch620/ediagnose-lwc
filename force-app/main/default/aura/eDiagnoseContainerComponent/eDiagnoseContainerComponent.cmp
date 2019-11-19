@@ -1,7 +1,9 @@
 <aura:component implements="forceCommunity:availableForAllPageTypes">
     <aura:attribute name="selectedSymptoms" type="Symptom__c[]" />
     <aura:attribute name="possibleConditions" type="Object[]" />
+    
     <aura:handler event="c:DiagnosisReceivedEvent" action="{!c.handleDiagnosisReceived}"/>
+    <aura:handler event="c:SymptomSelectedEvent" action="{!c.handleSymptomSelected}"/>
 
     <div class="slds-grid">
         <div class="slds-col">
@@ -9,8 +11,8 @@
         </div>
         <div class="slds-col">
             
-            <c:SymptomList />
-            <c:getConditionsButton selectedSymptoms="{!v.selectedSymptoms}" />
+            <c:SymptomList selectedSymptoms="{!v.selectedSymptoms}"/>
+            <c:getConditionsButton selectedSymptoms="{!v.selectedSymptoms}" onDiagnosisReceivedEvent="{!c.handleDiagnosisReceived}"/>
         </div>
     </div>    
     

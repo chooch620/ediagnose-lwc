@@ -1,20 +1,19 @@
-import { LightningElement, wire, api } from 'lwc';
+import { LightningElement, api, track } from 'lwc';
 import getPossibleConditions from '@salesforce/apex/SymptomListController.getPossibleConditions';
 
 export default class GetConditionsButton extends LightningElement {
-    @api selectedSymptoms;
+    @api selectedSymptoms; 
 
-    handleGetConditions() {
-        console.log('Yeet');
-    }
-
-    @wire(getPossibleConditions, {symptoms: '$selectedSymptoms'})
-    possibleConditions({ error, data }) {
-        if (data) {
-            console.log(`data: ${data}`);
-        } else if (error) {
-            console.log(`error: ${error}`);
-            
-        }
+    handleGetConditions(event) {
+        getPossibleConditions({symptoms : this.selectedSymptoms})
+            .then(result => {
+                event.preventDefault();
+                let conditions = result;
+                const diagnosisReceivedEvent = new CustomEvent('DiagnosisReceivedEvent', { detail: {possibleConditions:conditions} });
+                this.dispatchEvent(diagnosisReceivedEvent);
+            })
+            .catch(error => {
+                console.log(`Error getting conditions getConditionsButton: ${error}`);
+            });
     }
 }

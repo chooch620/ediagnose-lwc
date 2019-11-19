@@ -2,7 +2,7 @@ public with sharing class SymptomListController {
 
     private static final String SYMPTOM_WITHOUT_INFERMEDICA_ID = 'Symptom was passed without an InfermedicaId: ';
 
-    @AuraEnabled(cacheable=true)
+    @AuraEnabled
     public static List<Object> getPossibleConditions(List<Object> symptoms){
         // Will be used as the evidence value in the diagnosis Infermedica request
         List<CustomSymptom> customSymptoms = getSympmtoms(symptoms);
