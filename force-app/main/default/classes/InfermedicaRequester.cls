@@ -1,14 +1,3 @@
-/**
- * @File Name          : InfermedicaRequester.cls
- * @Description        : 
- * @Author             : Matthew Ruiz
- * @Group              : 
- * @Last Modified By   : Matthew Ruiz
- * @Last Modified On   : 11/8/2019, 4:20:47 PM
- * @Modification Log   : 
- * Ver       Date            Author      		    Modification
- * 1.0    11/7/2019   Matthew Ruiz     Initial Version
-**/
 public with sharing class InfermedicaRequester {
 
     public static HttpRequest buildRequest(InfermedicaEndpoints endpoint, String method, String appId, String appKey, String contentType) { 
